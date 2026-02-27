@@ -1,1 +1,49 @@
+Maybe we just copy paste this file in and out of r?
 
+---
+title: "Group_08_Analysis"
+format: html
+editor: visual
+number-sections: true
+excecute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(sjPlot)
+library(broom)
+library(performance)
+library(yardstick)
+
+
+BMI <- read.csv("DAProject8.csv")
+```
+
+
+#Introduction {#sec-intro}
+
+BMI/Year
+All except year/BMI
+
+#Exploratory Analysis {#sec-EA}
+
+```{r}
+#| label: tbl-avg
+#| tbl-cap: Mean and Standard Deviation of .
+
+data %>% 
+  summarise("Bill Length(Mean)" = mean(bill_length_mm),
+                   "Bill Length(sd)" = sd(bill_length_mm),
+                   .by = c(Gentoo,sex)) %>% 
+  kable(digits=2)
+```
+
+#Formal Analysis {#sec-FA}
+
+
+
+#Conclusion{#sec-con}

@@ -33,7 +33,7 @@ $$
 #| tbl-cap: Estimates of the regression model coefficient
 
 full_model <- lm(BMI ~ AgeGroup + Sex + Employment + Veg + Fruit + Year, data = BMI_data)
-
+tab_model(full_model,show.ci = F)
 ```
 
 
@@ -42,5 +42,11 @@ full_model <- lm(BMI ~ AgeGroup + Sex + Employment + Veg + Fruit + Year, data = 
 Looking at @tbl-lm, we can see the reduced model is:
 
 $$
-BMI ~=~ \alpha + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{Employment} \cdot \mathbb{I}_{Employment}(x) +  \beta_{Veg} \cdot \mathbb{I}_{Veg}(Yes)
+BMI ~=~ \alpha + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{Employment} \cdot \mathbb{I}_{Employment}(x) + \beta_{Employment} \cdot \mathbb{I}_{Employment}(x) + \beta_{Employment} \cdot \mathbb{I}_{Employment}(x) + \beta_{Employment} \cdot \mathbb{I}_{Employment}(x) + \beta_{Veg} \cdot \mathbb{I}_{Veg}(Yes)
+$$
+
+With this reduced model, the -logistic regression model will be:
+
+$$
+
 $$

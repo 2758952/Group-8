@@ -1,7 +1,12 @@
 ---
 title: "Group 8 project"
-author: "group 8"
-format: html
+author: "Group 8"
+format:
+  pdf:
+    fontsize: 11pt
+    documentclass: article
+    geometry: margin=0.25in
+    number-sections: true
 editor: visual
 ---
 
@@ -14,10 +19,15 @@ library(sjPlot)
 library(broom)
 library(performance)
 library(yardstick)
+library(kableExtra)
 
 ```
 
+<<<<<<< Updated upstream
 ## Introduction
+=======
+# Introduction {#sec-intro}
+>>>>>>> Stashed changes
 
 This investigation uses data from the 2008 - 2012 Scottish Health Survey, which collects information on the health, socio-economic, and lifestyle factors of people living in Scotland. The factors included in this dataset are: age group, sex, employment status, meets recommended vegetable intake (Yes/No), meets recommended fruit intake (Yes/No), survey year, and body mass index (BMI).
 
@@ -25,12 +35,100 @@ Body mass index is a quantity derived from the mass and height of a person, calc
 
 The aim of this investigation is to determine whether the body mass index in Scotland has changed between 2008 and 2012, and to assess if there are any differences in the BMI distribution by age, gender, socio-economic factors (employment status) or lifestyle factors (meets recommended fruit and veg intake).
 
+<<<<<<< Updated upstream
 # 
 
 ## Exploratory Analysis
+=======
+# Exploratory Analysis {#sec-eda}
+>>>>>>> Stashed changes
 
 ```{r}
 #| echo: false
 BMI_data<-read.csv("DAProject8.csv")
 
 ```
+<<<<<<< Updated upstream
+=======
+
+## Data Summaries
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| eval: false
+BMI_F<-BMI_data%>%
+  filter(Sex=="Female")
+BMI_M<-BMI_data%>%
+  filter(Sex=="Male")
+
+any(is.na(BMI_data))
+```
+
+We first inspect the balance of the data and check for missing values. The dataset contains a total of 25224 individuals. There were no missing values in any of the variables used in this report, so all 25224 individuals were retained for both the exploratory analysis and the subsequent modelling.
+
+@tbl-BMI_sum displays the summary statistics for BMI. The mean and median are very similar (27.81 and 27.17 respectively), indicating that the distribution is approximately symmetric, while the standard deviation of 5.26 suggests a large variation in BMI across individuals. The maximum and minimum values of 12.59 and 59.11 respectively indicate a wide range of BMI values within the sample.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: tbl-BMI_sum
+#| tbl-cap: Summary statistics for BMI
+
+summary_BMI<-BMI_data%>%
+  summarise(Mean=mean(BMI_data$BMI),
+             SD=sd(BMI_data$BMI),
+             Median=median(BMI_data$BMI),
+             Min=min(BMI_data$BMI),
+             Max=max(BMI_data$BMI))
+
+kable(summary_BMI)
+```
+
+## BMI and Year
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: fig-boxplots_BMI_year
+#| fig-cap: Boxplots of BMI for each year of survey
+ggplot(BMI_data,aes(x=factor(Year),y=BMI,fill=factor(Year)))+
+  geom_boxplot()+
+  labs(x="Year", y="BMI (kg/m^2)")+
+  theme(legend.position = "none")+
+  scale_fill_manual(values=c("darkolivegreen3","hotpink1","mediumpurple2","gold","steelblue2"))
+```
+
+@fig-boxplots_BMI_year shows the distribution of BMI across the different years of the Scottish Health Survey. The median BMI appears to remain stable over the entire period with no clear trend. The interquartile ranges and overall spread of the data are similar across the entire period. There is little evidence to suggest that BMI changed over the study period, but formal analysis is required to confirm this.
+
+### BMI and Additional Explanatory Variables
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+ggplot(BMI_data,aes(x=AgeGroup,y=BMI,fill=AgeGroup))+
+  geom_boxplot()+
+  scale_fill_manual(values=c("red","orange","pink","blue","yellow","purple","green"))+
+  labs(title="BMI vs Age Group",
+       x="Age Group", y="BMI")
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+ggplot(BMI_data,aes(x=Sex,y=BMI,fill=Sex))+
+  geom_boxplot()+
+  scale_fill_manual(values=c("pink","blue"))+
+  labs(title="BMI vs Sex",
+       x="Sex", y="BMI")
+```
+
+# Formal Data Analysis {#sec-fda}
+
+# Conclusion {#sec-conc}
+>>>>>>> Stashed changes

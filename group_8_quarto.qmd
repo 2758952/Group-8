@@ -23,11 +23,9 @@ library(kableExtra)
 
 ```
 
-<<<<<<< Updated upstream
-## Introduction
-=======
+
 # Introduction {#sec-intro}
->>>>>>> Stashed changes
+
 
 This investigation uses data from the 2008 - 2012 Scottish Health Survey, which collects information on the health, socio-economic, and lifestyle factors of people living in Scotland. The factors included in this dataset are: age group, sex, employment status, meets recommended vegetable intake (Yes/No), meets recommended fruit intake (Yes/No), survey year, and body mass index (BMI).
 
@@ -35,21 +33,16 @@ Body mass index is a quantity derived from the mass and height of a person, calc
 
 The aim of this investigation is to determine whether the body mass index in Scotland has changed between 2008 and 2012, and to assess if there are any differences in the BMI distribution by age, gender, socio-economic factors (employment status) or lifestyle factors (meets recommended fruit and veg intake).
 
-<<<<<<< Updated upstream
-# 
 
-## Exploratory Analysis
-=======
 # Exploratory Analysis {#sec-eda}
->>>>>>> Stashed changes
+
 
 ```{r}
 #| echo: false
 BMI_data<-read.csv("DAProject8.csv")
 
 ```
-<<<<<<< Updated upstream
-=======
+
 
 ## Data Summaries
 
@@ -104,7 +97,7 @@ ggplot(BMI_data,aes(x=factor(Year),y=BMI,fill=factor(Year)))+
 
 @fig-boxplots_BMI_year shows the distribution of BMI across the different years of the Scottish Health Survey. The median BMI appears to remain stable over the entire period with no clear trend. The interquartile ranges and overall spread of the data are similar across the entire period. There is little evidence to suggest that BMI changed over the study period, but formal analysis is required to confirm this.
 
-### BMI and Additional Explanatory Variables
+## BMI and Additional Explanatory Variables
 
 ```{r}
 #| echo: false
@@ -131,4 +124,4 @@ ggplot(BMI_data,aes(x=Sex,y=BMI,fill=Sex))+
 # Formal Data Analysis {#sec-fda}
 
 # Conclusion {#sec-conc}
->>>>>>> Stashed changes
+

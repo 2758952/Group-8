@@ -17,7 +17,7 @@ library(yardstick)
 
 ```
 
-## Introduction
+## Introduction {#sec-intro}
 
 This investigation uses data from the 2008 - 2012 Scottish Health Survey, which collects information on the health, socio-economic, and lifestyle factors of people living in Scotland. The factors included in this dataset are: age group, sex, employment status, meets recommended vegetable intake (Yes/No), meets recommended fruit intake (Yes/No), survey year, and body mass index (BMI).
 
@@ -27,10 +27,60 @@ The aim of this investigation is to determine whether the body mass index in Sco
 
 # 
 
-## Exploratory Analysis
+## Exploratory Analysis {#sec-eda}
 
 ```{r}
 #| echo: false
+#| message: false
+#| warning: false
 BMI_data<-read.csv("DAProject8.csv")
+library(ggplot2)
 
 ```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+ggplot(BMI_data,aes(x=BMI))+
+  geom_histogram(binwidth=1,fill="red",color="black")+
+  labs(title="BMI Distribution",
+       x="BMI",y="Frequnecy")+
+  theme_minimal()
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+ggplot(BMI_data,aes(x=factor(Year),y=BMI))+
+  geom_boxplot()
+  labs(title="BMI vs Year",
+       x="Year", y="BMI")
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+ggplot(BMI_data,aes(x=AgeGroup,y=BMI,fill=AgeGroup))+
+  geom_boxplot()+
+  scale_fill_manual(values=c("red","orange","pink","blue","yellow","purple","green"))+
+  labs(title="BMI vs Age Group",
+       x="Age Group", y="BMI")
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+ggplot(BMI_data,aes(x=Sex,y=BMI,fill=Sex))+
+  geom_boxplot()+
+  scale_fill_manual(values=c("pink","blue"))+
+  labs(title="BMI vs Sex",
+       x="Sex", y="BMI")
+```
+
+## Formal Data Analysis {#sec-fda}
+
+## Conclusion {#sec-conc}

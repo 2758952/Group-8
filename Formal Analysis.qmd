@@ -1,0 +1,46 @@
+---
+title: "Group Project"
+format: html
+editor: visual
+
+---
+
+```{r}
+#| warning: false
+#| echo: false
+library(tidyverse)
+library(ggplot2)
+library(sjPlot)
+library(broom)
+library(performance)
+library(yardstick)
+BMI_data<-read.csv("DAProject8.csv")
+```
+
+# Formal data analysis {#sec-fda}
+
+We start by fitting the full multiple regression model containing all explanatory variables. The full model can be written as:
+
+$$
+BMI ~=~ \alpha + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{Sex} \cdot \mathbb{I}_{sex}(male) + \beta_{Employment} \cdot \mathbb{I}_{Employment}(x) +  \beta_{Veg} \cdot \mathbb{I}_{Veg}(Yes) + \beta_{Fruit} \cdot \mathbb{I}_{Fruit}(Yes) + \beta_{Year} \cdot \mathbb{I}_{Year}(x)
+$$
+
+```{r}
+#| warning: false
+#| echo: false
+#| message: false
+#| label: tbl-lm
+#| tbl-cap: Estimates of the regression model coefficient
+
+full_model <- lm(BMI ~ AgeGroup + Sex + Employment + Veg + Fruit + Year, data = BMI_data)
+
+```
+
+
+
+
+Looking at @tbl-lm, we can see the reduced model is:
+
+$$
+BMI ~=~ \alpha + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{Employment} \cdot \mathbb{I}_{Employment}(x) +  \beta_{Veg} \cdot \mathbb{I}_{Veg}(Yes)
+$$

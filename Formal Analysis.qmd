@@ -14,6 +14,7 @@ library(sjPlot)
 library(broom)
 library(performance)
 library(yardstick)
+library(see)
 BMI_data<-read.csv("DAProject8.csv")
 ```
 
@@ -42,11 +43,33 @@ tab_model(full_model,show.ci = F)
 Looking at @tbl-lm, we can see the reduced model is:
 
 $$
-BMI ~=~ \alpha + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{Employment} \cdot \mathbb{I}_{Employment}(x) + \beta_{Employment} \cdot \mathbb{I}_{Employment}(x) + \beta_{Employment} \cdot \mathbb{I}_{Employment}(x) + \beta_{Employment} \cdot \mathbb{I}_{Employment}(x) + \beta_{Veg} \cdot \mathbb{I}_{Veg}(Yes)
+BMI ~=~ \alpha + \beta_{AgeGroup[25-34]} \cdot \mathbb{I}_{AgeGroup}([25-34]) + \beta_{AgeGroup[35-44]} \cdot \mathbb{I}_{AgeGroup}([35-44]) + \beta_{AgeGroup[45-54]} \cdot \mathbb{I}_{AgeGroup}([45-54]) + \beta_{AgeGroup[55-64]} \cdot \mathbb{I}_{AgeGroup}([55-64]) + \beta_{AgeGroup[65-74]} \cdot \mathbb{I}_{AgeGroup}([65-74]) + \beta_{AgeGroup[75+]} \cdot \mathbb{I}_{AgeGroup[75+]}([75+]) + \beta_{Employment[\text{In full-time
+education}]} \cdot \mathbb{I}_{Employment}([\text{In full-time
+education}]) + \beta_{Employment[\text{In paid
+employment, self-employed
+or on gov't training}]} \cdot \mathbb{I}_{Employment}([\text{In paid
+employment, self-employed
+or on gov't training}]) + \beta_{Employment[\text{Perm unable
+to work}]} \cdot \mathbb{I}_{Employment}([\text{Perm unable
+to work}]) + \beta_{Employment[Retired]} \cdot \mathbb{I}_{Employment}([Retired]) + \beta_{Veg} \cdot \mathbb{I}_{Veg}(Yes)
 $$
 
 With this reduced model, the -logistic regression model will be:
 
 $$
-
+BMI = -17.9 + 1.18 \cdot \mathbb{I}_{AgeGroup}([25-34]) + 2.5 \cdot \mathbb{I}_{AgeGroup}([35-44]) + 2.77 \cdot \mathbb{I}_{AgeGroup}([45-54]) + 3.28 \cdot \mathbb{I}_{AgeGroup}([55-64]) + 3.19 \cdot \mathbb{I}_{AgeGroup}([65-74]) + 2.33 \cdot \mathbb{I}_{AgeGroup}([75+]) - 0.87 \cdot \mathbb{I}_{Employment}(\text{[In full-time education]}) + 0.67 \cdot \mathbb{I}_{Employment}(\text{[In paid
+employment, self-employed or on gov't training]}) + 1.18 \cdot \mathbb{I}_{Employment}(\text{[Perm unable
+to work]}) + 0.66 \cdot \mathbb{I}_{Employment}([Retired]) - 0.42 \cdot \mathbb{I}_{Veg}(Yes)
 $$
+```{r}
+#| echo: false
+#| fig-cap: Final model diagnostic plots
+#| label: fig-resids
+#| fig-width: 6
+#| fig-height: 6
+#| fig-align: center
+
+performance::check_model(full_model,check=c("qq","normality","homogeneity","linearity"))
+
+```
+

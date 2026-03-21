@@ -232,8 +232,36 @@ to work]</td>
 </div>
 <p>Looking at <a href="#tbl-lm" class="quarto-xref">Table&nbsp;1</a>, we can see the reduced model is:</p>
 <p><span class="math display">\[
-BMI ~=~ \alpha + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{Employment} \cdot \mathbb{I}_{Employment}(x) +  \beta_{Veg} \cdot \mathbb{I}_{Veg}(Yes)
+BMI ~=~ \alpha + \beta_{AgeGroup[25-34]} \cdot \mathbb{I}_{AgeGroup}([25-34]) + \beta_{AgeGroup[35-44]} \cdot \mathbb{I}_{AgeGroup}([35-44]) + \beta_{AgeGroup[45-54]} \cdot \mathbb{I}_{AgeGroup}([45-54]) + \beta_{AgeGroup[55-64]} \cdot \mathbb{I}_{AgeGroup}([55-64]) + \beta_{AgeGroup[65-74]} \cdot \mathbb{I}_{AgeGroup}([65-74]) + \beta_{AgeGroup[75+]} \cdot \mathbb{I}_{AgeGroup[75+]}([75+]) + \beta_{Employment[\text{In full-time
+education}]} \cdot \mathbb{I}_{Employment}([\text{In full-time
+education}]) + \beta_{Employment[\text{In paid
+employment, self-employed
+or on gov't training}]} \cdot \mathbb{I}_{Employment}([\text{In paid
+employment, self-employed
+or on gov't training}]) + \beta_{Employment[\text{Perm unable
+to work}]} \cdot \mathbb{I}_{Employment}([\text{Perm unable
+to work}]) + \beta_{Employment[Retired]} \cdot \mathbb{I}_{Employment}([Retired]) + \beta_{Veg} \cdot \mathbb{I}_{Veg}(Yes)
 \]</span></p>
+<p>With this reduced model, the -logistic regression model will be:</p>
+<p><span class="math display">\[
+BMI = -17.9 + 1.18 \cdot \mathbb{I}_{AgeGroup}([25-34]) + 2.5 \cdot \mathbb{I}_{AgeGroup}([35-44]) + 2.77 \cdot \mathbb{I}_{AgeGroup}([45-54]) + 3.28 \cdot \mathbb{I}_{AgeGroup}([55-64]) + 3.19 \cdot \mathbb{I}_{AgeGroup}([65-74]) + 2.33 \cdot \mathbb{I}_{AgeGroup}([75+]) - 0.87 \cdot \mathbb{I}_{Employment}(\text{[In full-time education]}) + 0.67 \cdot \mathbb{I}_{Employment}(\text{[In paid
+employment, self-employed or on gov't training]}) + 1.18 \cdot \mathbb{I}_{Employment}(\text{[Perm unable
+to work]}) + 0.66 \cdot \mathbb{I}_{Employment}([Retired]) - 0.42 \cdot \mathbb{I}_{Veg}(Yes)
+\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-resids" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-resids-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Formal-Analysis_files/figure-html/fig-resids-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-resids-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Final model diagnostic plots
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 
 </main>

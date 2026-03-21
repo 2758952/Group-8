@@ -54,7 +54,7 @@ BMI_M<-BMI_data%>%
 any(is.na(BMI_data))
 ```
 
-We first inspect the balance of the data and check for missing values. The dataset contains a total of 25224 individuals. There were no missing values in any of the variables used in this report, so all 25224 individuals were retained for both the exploratory analysis and the subsequent modelling.
+We first inspect the sizeof the dataset and check for missing values. The dataset contains a total of 25224 individuals. There were no missing values in any of the variables used in this report, so all 25224 individuals were retained for both the exploratory analysis and the subsequent modelling.
 
 @tbl-BMI_sum displays the summary statistics for BMI. The mean and median are very similar (27.81 and 27.17 respectively), indicating that the distribution is approximately symmetric, while the standard deviation of 5.26 suggests a large variation in BMI across individuals. The maximum and minimum values of 12.59 and 59.11 respectively indicate a wide range of BMI values within the sample.
 

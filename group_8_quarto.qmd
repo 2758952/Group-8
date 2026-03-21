@@ -20,6 +20,7 @@ library(broom)
 library(performance)
 library(yardstick)
 library(kableExtra)
+library(gridExtra)
 
 ```
 
@@ -54,7 +55,7 @@ BMI_M<-BMI_data%>%
 any(is.na(BMI_data))
 ```
 
-We first inspect the balance of the data and check for missing values. The dataset contains a total of 25224 individuals. There were no missing values in any of the variables used in this report, so all 25224 individuals were retained for both the exploratory analysis and the subsequent modelling.
+We first inspect the balance of the data and check for missing values. The dataset contains a total of 25224 participants. There were no missing values in any of the variables used in this report, so all 25224 participants were retained for both the exploratory analysis and the subsequent modelling.
 
 @tbl-BMI_sum displays the summary statistics for BMI. The mean and median are very similar (27.81 and 27.17 respectively), indicating that the distribution is approximately symmetric, while the standard deviation of 5.26 suggests a large variation in BMI across individuals. The maximum and minimum values of 12.59 and 59.11 respectively indicate a wide range of BMI values within the sample.
 
@@ -66,11 +67,11 @@ We first inspect the balance of the data and check for missing values. The datas
 #| tbl-cap: Summary statistics for BMI
 
 summary_BMI<-BMI_data%>%
-  summarise(Mean=mean(BMI_data$BMI),
-             SD=sd(BMI_data$BMI),
-             Median=median(BMI_data$BMI),
-             Min=min(BMI_data$BMI),
-             Max=max(BMI_data$BMI))
+  summarise(Mean=round(mean(BMI_data$BMI),3),
+             SD=round(sd(BMI_data$BMI),3),
+             Median=round(median(BMI_data$BMI),3),
+             Min=round(min(BMI_data$BMI),3),
+             Max=round(max(BMI_data$BMI),3))
 
 kable(summary_BMI)
 ```
@@ -81,6 +82,9 @@ kable(summary_BMI)
 #| echo: false
 #| message: false
 #| warning: false
+#| fig-width: 6.5
+#| fig-height: 3
+#| fig-pos: 'h'
 #| label: fig-boxplots_BMI_year
 #| fig-cap: Boxplots of BMI for each year of survey
 ggplot(BMI_data,aes(x=factor(Year),y=BMI,fill=factor(Year)))+
@@ -94,27 +98,51 @@ ggplot(BMI_data,aes(x=factor(Year),y=BMI,fill=factor(Year)))+
 
 ## BMI and Additional Explanatory Variables
 
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-ggplot(BMI_data,aes(x=AgeGroup,y=BMI,fill=AgeGroup))+
-  geom_boxplot()+
-  scale_fill_manual(values=c("red","orange","pink","blue","yellow","purple","green"))+
-  labs(title="BMI vs Age Group",
-       x="Age Group", y="BMI")
-```
+### Demographic Variables
+
+@fig-boxplots_demo_vars shows the distribution of BMI by age group and sex. There appears to be a very slight increase in the median BMI as age group increases, suggesting that older individuals tend to have higher BMI values. But the interquartile ranges have a significant overlap so the differences between age groups may be small or insignificant and should further investigated in later formal analysis.
+
+There appears to be little difference in the distribution of BMI for female and male participants, other than in the interquartile ranges, with a larger range in the female participants, indicating greater variability in BMI among females compared to males.
 
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
-ggplot(BMI_data,aes(x=Sex,y=BMI,fill=Sex))+
+#| fig-width: 7
+#| fig-height: 3.5
+#| fig-pos: 'h'
+#| label: fig-boxplots_demo_vars
+#| fig-cap: Boxplots for the demographic variables, age group and sex
+p1<-ggplot(BMI_data,aes(x=AgeGroup,y=BMI,fill=AgeGroup))+
   geom_boxplot()+
-  scale_fill_manual(values=c("pink","blue"))+
+  scale_fill_manual(values=c("darkolivegreen3","darkorange","hotpink1","steelblue2","gold","mediumpurple2","cadetblue2"))+
+  labs(title="BMI vs Age Group",
+       x="Age Group", y="BMI")+
+  theme(legend.position = "none")
+p2<-ggplot(BMI_data,aes(x=Sex,y=BMI,fill=Sex))+
+  geom_boxplot()+
+  scale_fill_manual(values=c("hotpink1","darkolivegreen3"))+
   labs(title="BMI vs Sex",
-       x="Sex", y="BMI")
+       x="Sex", y="BMI")+
+  theme(legend.position = "none")
+grid.arrange(p1,p2,ncol=2)
 ```
+
+### Socio-Economic and Lifestyle Variables
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+ggplot(BMI_data,aes(x=Employment,y=BMI,fill=Employment))+
+  geom_boxplot()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  theme(legend.position = "none")
+
+```
+
+\[to be removed\] {Notes: if we do a joint graph for lifestyle variables like we've done for demographic variables, i think we might be able to keep explortatory analysis to the first 3 pages, leaving 3 pages for formal analysis. Employment status is a pain- idk if maybe we should rename the variables or something? Discuss at meeting on Monday }
 
 # Formal Data Analysis {#sec-fda}
 

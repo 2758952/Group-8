@@ -148,13 +148,11 @@ ggplot(BMI_data,aes(x=Employment,y=BMI,fill=Employment))+
 
 We start by fitting the full multiple regression model containing all explanatory variables. The full model can be written as:
 
-
 \begin{align*}
 BMI ~=~& \alpha + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{Sex} \cdot \mathbb{I}_{Sex}(male) \\
        & + \beta_{Employment} \cdot \mathbb{I}_{Employment}(x) + \beta_{Veg} \cdot \mathbb{I}_{Veg}(Yes) \\
        & + \beta_{Fruit} \cdot \mathbb{I}_{Fruit}(Yes) + \beta_{Year} \cdot \mathbb{I}_{Year}(x)
 \end{align*}
-
 
 ```{r}
 #| warning: false
@@ -169,7 +167,6 @@ tab_model(full_model,show.ci = F)
 
 Looking at @tbl-lm, we can see the reduced model is:
 
-
 \begin{align*}
 BMI ~=~& \alpha + \beta_{Age[25\text{-}34]} \cdot \mathbb{I}_{Age}([25\text{-}34]) + \beta_{Age[35\text{-}44]} \cdot \mathbb{I}_{Age}([35\text{-}44]) \\
        & + \beta_{Age[45\text{-}54]} \cdot \mathbb{I}_{Age}([45\text{-}54]) + \beta_{Age[55\text{-}64]} \cdot \mathbb{I}_{Age}([55\text{-}64]) \\
@@ -178,7 +175,6 @@ BMI ~=~& \alpha + \beta_{Age[25\text{-}34]} \cdot \mathbb{I}_{Age}([25\text{-}34
        & + \beta_{Emp[\text{Unable}]} \cdot \mathbb{I}_{Emp}([\text{Unable}]) + \beta_{Emp[\text{Retired}]} \cdot \mathbb{I}_{Emp}([\text{Retired}]) \\
        & + \beta_{Veg} \cdot \mathbb{I}_{Veg}(Yes)
 \end{align*}
-
 
 With this reduced model, the -logistic regression model will be:
 
@@ -201,4 +197,5 @@ BMI ~=~& -17.9 + 1.18 \cdot \mathbb{I}_{Age}([25\text{-}34]) + 2.5 \cdot \mathbb
 performance::check_model(full_model,check=c("qq","normality","homogeneity","linearity"))
 
 ```
+
 # Conclusion {#sec-conc}

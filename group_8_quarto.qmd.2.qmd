@@ -76,6 +76,8 @@ summary_BMI<-BMI_data%>%
 kable(summary_BMI)
 ```
 
+## Distribution Of BMI
+
 ## BMI and Year
 
 ```{r}
@@ -141,8 +143,6 @@ ggplot(BMI_data,aes(x=Employment,y=BMI,fill=Employment))+
   theme(legend.position = "none")
 
 ```
-
-\[to be removed\] {Notes: if we do a joint graph for lifestyle variables like we've done for demographic variables, i think we might be able to keep explortatory analysis to the first 3 pages, leaving 3 pages for formal analysis. Employment status is a pain- idk if maybe we should rename the variables or something? Discuss at meeting on Monday }
 
 # Formal Data Analysis {#sec-fda}
 

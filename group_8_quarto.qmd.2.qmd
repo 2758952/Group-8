@@ -1,0 +1,147 @@
+---
+title: "Group 8 project"
+author: "Group 8"
+format:
+  pdf:
+    fontsize: 11pt
+    documentclass: article
+    geometry: margin=0.25in
+    number-sections: true
+editor: visual
+---
+
+```{r}
+#| warning: false
+#| echo: false
+library(tidyverse)
+library(ggplot2)
+library(sjPlot)
+library(broom)
+library(performance)
+library(yardstick)
+library(kableExtra)
+library(gridExtra)
+
+```
+
+# Introduction {#sec-intro}
+
+This investigation uses data from the 2008 - 2012 Scottish Health Survey, which collects information on the health, socio-economic, and lifestyle factors of people living in Scotland. The factors included in this dataset are: age group, sex, employment status, meets recommended vegetable intake (Yes/No), meets recommended fruit intake (Yes/No), survey year, and body mass index (BMI).
+
+Body mass index is a quantity derived from the mass and height of a person, calculated as mass divided by the squared height, and measured in $kg/m^2$. It is a useful indicator for determining if an individual is underweight (BMI under 18.5), overweight (BMI over 25), or at a healthy weight, and it is especially useful for health data.
+
+The aim of this investigation is to determine whether the body mass index in Scotland has changed between 2008 and 2012, and to assess if there are any differences in the BMI distribution by age, gender, socio-economic factors (employment status) or lifestyle factors (meets recommended fruit and veg intake).
+
+# Exploratory Analysis {#sec-eda}
+
+```{r}
+#| echo: false
+BMI_data<-read.csv("DAProject8.csv")
+
+```
+
+## Data Summaries
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| eval: false
+BMI_F<-BMI_data%>%
+  filter(Sex=="Female")
+BMI_M<-BMI_data%>%
+  filter(Sex=="Male")
+
+any(is.na(BMI_data))
+```
+
+We first inspect the balance of the data and check for missing values. The dataset contains a total of 25224 participants. There were no missing values in any of the variables used in this report, so all 25224 participants were retained for both the exploratory analysis and the subsequent modelling.
+
+@tbl-BMI_sum displays the summary statistics for BMI. The mean and median are very similar (27.81 and 27.17 respectively), indicating that the distribution is approximately symmetric, while the standard deviation of 5.26 suggests a large variation in BMI across individuals. The maximum and minimum values of 12.59 and 59.11 respectively indicate a wide range of BMI values within the sample.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: tbl-BMI_sum
+#| tbl-cap: Summary statistics for BMI
+
+summary_BMI<-BMI_data%>%
+  summarise(Mean=round(mean(BMI_data$BMI),3),
+             SD=round(sd(BMI_data$BMI),3),
+             Median=round(median(BMI_data$BMI),3),
+             Min=round(min(BMI_data$BMI),3),
+             Max=round(max(BMI_data$BMI),3))
+
+kable(summary_BMI)
+```
+
+## BMI and Year
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 6.5
+#| fig-height: 3
+#| fig-pos: 'h'
+#| label: fig-boxplots_BMI_year
+#| fig-cap: Boxplots of BMI for each year of survey
+ggplot(BMI_data,aes(x=factor(Year),y=BMI,fill=factor(Year)))+
+  geom_boxplot()+
+  labs(x="Year", y="BMI (kg/m^2)")+
+  theme(legend.position = "none")+
+  scale_fill_manual(values=c("darkolivegreen3","hotpink1","mediumpurple2","gold","steelblue2"))
+```
+
+@fig-boxplots_BMI_year shows the distribution of BMI across the different years of the Scottish Health Survey. The median BMI appears to remain stable over the entire period with no clear trend. The interquartile ranges and overall spread of the data are similar across the entire period. There is little evidence to suggest that BMI changed over the study period, but formal analysis is required to confirm this.
+
+## BMI and Additional Explanatory Variables
+
+### Demographic Variables
+
+@fig-boxplots_demo_vars shows the distribution of BMI by age group and sex. There appears to be a very slight increase in the median BMI as age group increases, suggesting that older individuals tend to have higher BMI values. But the interquartile ranges have a significant overlap so the differences between age groups may be small or insignificant and should further investigated in later formal analysis.
+
+There appears to be little difference in the distribution of BMI for female and male participants, other than in the interquartile ranges, with a larger range in the female participants, indicating greater variability in BMI among females compared to males.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 7
+#| fig-height: 3.5
+#| fig-pos: 'h'
+#| label: fig-boxplots_demo_vars
+#| fig-cap: Boxplots for the demographic variables, age group and sex
+p1<-ggplot(BMI_data,aes(x=AgeGroup,y=BMI,fill=AgeGroup))+
+  geom_boxplot()+
+  scale_fill_manual(values=c("darkolivegreen3","darkorange","hotpink1","steelblue2","gold","mediumpurple2","cadetblue2"))+
+  labs(title="BMI vs Age Group",
+       x="Age Group", y="BMI")+
+  theme(legend.position = "none")
+p2<-ggplot(BMI_data,aes(x=Sex,y=BMI,fill=Sex))+
+  geom_boxplot()+
+  scale_fill_manual(values=c("hotpink1","darkolivegreen3"))+
+  labs(title="BMI vs Sex",
+       x="Sex", y="BMI")+
+  theme(legend.position = "none")
+grid.arrange(p1,p2,ncol=2)
+```
+
+### Socio-Economic and Lifestyle Variables
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+ggplot(BMI_data,aes(x=Employment,y=BMI,fill=Employment))+
+  geom_boxplot()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  theme(legend.position = "none")
+
+```
+
+# Formal Data Analysis {#sec-fda}
+
+# Conclusion {#sec-conc}

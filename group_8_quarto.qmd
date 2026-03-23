@@ -13,15 +13,23 @@ editor: visual
 ```{r}
 #| warning: false
 #| echo: false
+install.packages("patchwork")
 library(tidyverse)
 library(ggplot2)
 library(sjPlot)
 library(broom)
 library(performance)
 library(yardstick)
+<<<<<<< Updated upstream
 library(kableExtra)
 library(gridExtra)
+=======
+library(patchwork)
+>>>>>>> Stashed changes
 
+```
+```{r}
+tinytex::install_tinytex()
 ```
 
 # Introduction {#sec-intro}
@@ -37,6 +45,13 @@ The aim of this investigation is to determine whether the body mass index in Sco
 ```{r}
 #| echo: false
 BMI_data<-read.csv("DAProject8.csv")
+<<<<<<< Updated upstream
+=======
+
+```
+
+```{r}
+>>>>>>> Stashed changes
 
 ```
 
@@ -46,6 +61,7 @@ BMI_data<-read.csv("DAProject8.csv")
 #| echo: false
 #| message: false
 #| warning: false
+<<<<<<< Updated upstream
 #| eval: false
 BMI_F<-BMI_data%>%
   filter(Sex=="Female")
@@ -76,11 +92,18 @@ summary_BMI<-BMI_data%>%
              Max=round(max(BMI_data$BMI),3))
 
 kable(summary_BMI)
+=======
+ggplot(BMI_data,aes(x=AgeGroup,y=BMI, colour = Sex))+
+  geom_boxplot()
+  labs(title="BMI vs Year",
+       x="Year", y="BMI")
+>>>>>>> Stashed changes
 ```
 
 ## BMI and Year
 
 ```{r}
+<<<<<<< Updated upstream
 #| echo: false
 #| message: false
 #| warning: false
@@ -128,11 +151,52 @@ p2<-ggplot(BMI_data,aes(x=Sex,y=BMI,fill=Sex))+
        x="Sex", y="BMI")+
   theme(legend.position = "none")
 grid.arrange(p1,p2,ncol=2)
+=======
+  p1<-ggplot(BMI_data,aes(x=BMI,fill=factor(Year)))+
+    geom_histogram(binwidth=1)+
+    labs(title="BMI Distribution",
+         x="BMI",y="Frequnecy")+
+  geom_density(alpha=0.05)
+
+p2<- ggplot(BMI_data,aes(x=BMI,fill=Sex))+
+    geom_histogram(binwidth=1)+
+    labs(title="BMI Distribution",
+         x="BMI",y="Frequnecy")+
+  geom_density(alpha=0.05)
+
+p3<-  ggplot(BMI_data,aes(x=BMI,fill=AgeGroup))+
+    geom_histogram(binwidth=1)+
+    labs(title="BMI Distribution",
+         x="BMI",y="Frequnecy")+
+  geom_density(alpha=0.05)
+
+p4<-  ggplot(BMI_data,aes(x=BMI,fill=Employment))+
+    geom_histogram(binwidth=1)+
+    labs(title="BMI Distribution",
+         x="BMI",y="Frequnecy")+
+  geom_density(alpha=0.05)
+
+p5<-  ggplot(BMI_data,aes(x=BMI,fill=Veg))+
+    geom_histogram(binwidth=1)+
+    labs(title="BMI Distribution",
+         x="BMI",y="Frequnecy")+
+  geom_density(alpha=0.05)
+
+p6<- ggplot(BMI_data,aes(x=BMI,fill=Fruit))+
+    geom_histogram(binwidth=1)+
+    labs(title="BMI Distribution",
+         x="BMI",y="Frequnecy")+
+  geom_density(alpha=0.05)
+
+(p1+p2+p3)/(p4+p5+p6)+
+plot_layout(guides="collect")
+>>>>>>> Stashed changes
 ```
 
 ### Socio-Economic and Lifestyle Variables
 
 ```{r}
+<<<<<<< Updated upstream
 #| echo: false
 #| message: false
 #| warning: false
@@ -141,6 +205,38 @@ ggplot(BMI_data,aes(x=Employment,y=BMI,fill=Employment))+
   geom_boxplot()+
   theme(axis.text.x = element_text(angle = 45, hjust = 1))+
   theme(legend.position = "none")
+=======
+
+```
+```{r}
+
+
+  
+```
+```{r}
+ ggplot(BMI_data,aes(x=BMI,fill=Employment))+
+    geom_histogram(binwidth=1)+
+    labs(title="BMI Distribution",
+         x="BMI",y="Frequnecy")+
+  geom_density(alpha=0.05)
+```
+
+
+```{r}
+ ggplot(BMI_data,aes(x=BMI,fill=Veg))+
+    geom_histogram(binwidth=1)+
+    labs(title="BMI Distribution",
+         x="BMI",y="Frequnecy")+
+  geom_density(alpha=0.05)
+```
+```{r}
+ ggplot(BMI_data,aes(x=BMI,fill=Fruit))+
+    geom_histogram(binwidth=1)+
+    labs(title="BMI Distribution",
+         x="BMI",y="Frequnecy")+
+  geom_density(alpha=0.05)
+```
+>>>>>>> Stashed changes
 
 ```
 

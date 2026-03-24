@@ -116,10 +116,6 @@ ggplot(BMI_data,aes(x=factor(Year),y=BMI,fill=factor(Year)))+
 
 ### Demographic Variables
 
-@fig-boxplots_demo_vars shows the distribution of BMI by age group and sex. There appears to be a very slight increase in the median BMI as age group increases, suggesting that older individuals tend to have higher BMI values. But the interquartile ranges have a significant overlap so the differences between age groups may be small or insignificant and should further investigated in later formal analysis.
-
-There appears to be little difference in the distribution of BMI for female and male participants, other than in the interquartile ranges, with a larger range in the female participants, indicating greater variability in BMI among females compared to males.
-
 ```{r}
 #| echo: false
 #| message: false
@@ -144,6 +140,10 @@ p2<-ggplot(BMI_data,aes(x=Sex,y=BMI,fill=Sex))+
 grid.arrange(p1,p2,ncol=2)
 ```
 
+@fig-boxplots_demo_vars shows the distribution of BMI by age group and sex. There appears to be a very slight increase in the median BMI as age group increases, suggesting that older individuals tend to have higher BMI values. But the interquartile ranges have a significant overlap so the differences between age groups may be small or insignificant and should further investigated in later formal analysis.
+
+There appears to be little difference in the distribution of BMI for female and male participants, other than in the interquartile ranges, with a larger range in the female participants, indicating greater variability in BMI among females compared to males.
+
 ### Socio-Economic and Lifestyle Variables
 
 ```{r}
@@ -152,6 +152,7 @@ grid.arrange(p1,p2,ncol=2)
 #| warning: false
 #| fig-cap: Boxplots of BMI across the socio-economic variable, employment
 #| label: fig-boxplot_employ
+#| fig-pos: "h"
 
 ggplot(BMI_data,aes(x=Employment,y=BMI,fill=Employment))+
   geom_boxplot()+

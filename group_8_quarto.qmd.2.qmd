@@ -128,7 +128,7 @@ There appears to be little difference in the distribution of BMI for female and 
 #| fig-height: 3.5
 #| fig-pos: 'h'
 #| label: fig-boxplots_demo_vars
-#| fig-cap: Boxplots for the demographic variables, age group and sex
+#| fig-cap: Boxplots of BMI across the demographic variables, age group and sex
 p1<-ggplot(BMI_data,aes(x=AgeGroup,y=BMI,fill=AgeGroup))+
   geom_boxplot()+
   scale_fill_manual(values=c("darkolivegreen3","darkorange","hotpink1","steelblue2","gold","mediumpurple2","cadetblue2"))+
@@ -150,13 +150,42 @@ grid.arrange(p1,p2,ncol=2)
 #| echo: false
 #| message: false
 #| warning: false
+#| fig-cap: Boxplots of BMI across the socio-economic variable, employment
+#| label: fig-boxplot_employ
 
 ggplot(BMI_data,aes(x=Employment,y=BMI,fill=Employment))+
   geom_boxplot()+
+  scale_x_discrete(labels=c("Doing something else"="Else","In full-time education"="FT Edu","In paid employment, self-employed or on gov't training"="Employed","Looking after home/family"="Carer","Looking for/intending to look for paid work"="Searching","Perm unable to work"="Unable","Retired"="Retired"))+
   theme(axis.text.x = element_text(angle = 45, hjust = 1))+
-  theme(legend.position = "none")
+  theme(legend.position = "none")+
+  scale_fill_manual(values=c("darkolivegreen3","darkorange","hotpink1","steelblue2","gold","mediumpurple2","cadetblue2"))+
+  labs(y="BMI (kg/m^2)")
 
 ```
+
+@fig-boxplot_employ shows the distribution of BMI across the different employment categories. Individuals in full-time education appear to have a lower BMI compared to other employment groups, but the interquartile ranges for all groups substantially overlap, suggesting that the differences in BMI across these groups are relatively small and significance should be investigated with formal analysis. There also appear to be outliers at both extremes of BMI across the categories.
+
+```{r}
+#| echo: false
+#| fig-cap: Boxplots of BMI across the lifestyle variables fruit and veg
+#| label: fig-boxplots_fruit_veg
+
+p2<-ggplot(BMI_data,aes(x=Veg,y=BMI,fill=Veg))+
+  geom_boxplot()+
+  theme(legend.position = "none")+
+  scale_fill_manual(values=c("darkolivegreen3","hotpink1"))+
+  labs(y="BMI (kg/m^2)")
+p1<-ggplot(BMI_data,aes(x=Fruit,y=BMI,fill=Fruit))+
+  geom_boxplot()+
+  theme(legend.position = "none")+
+  scale_fill_manual(values=c("darkolivegreen3","hotpink1"))+
+  labs(y="BMI (kg/m^2)")
+
+grid.arrange(p1,p2,ncol=2)
+
+```
+
+@fig-boxplots_fruit_veg shows the distribution of BMI by fruit and vegetable consumption. The boxplots in both factors appear very similar with the medians, and interquartile ranges being at similar levels. This suggests that there is no clear evidence of a difference in BMI for participants who consume their recommemded fruit and veg and those who don't, but this should be investigated in formal analysis.
 
 # Formal Data Analysis {#sec-fda}
 

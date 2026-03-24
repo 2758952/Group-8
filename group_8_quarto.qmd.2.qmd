@@ -234,6 +234,11 @@ BMI ~=~& -17.9 + 1.18 \cdot \mathbb{I}_{Age}([25\text{-}34]) + 2.5 \cdot \mathbb
        & + 1.18 \cdot \mathbb{I}_{Emp}([\text{Unable to work}]) + 0.66 \cdot \mathbb{I}_{Emp}([\text{Retired}]) \\
        & - 0.42 \cdot \mathbb{I}_{Veg}(Yes)
 \end{align*}
+<<<<<<< Updated upstream
+=======
+```
+The baseline category for this model is individuals aged 16--24, not in full-time education and not meeting the recommended daily vegetable intake. Interpreting the coefficients relative to this baseline: BMI increases substantially with age, peaking in the 55--64 age group with a coefficient of 3.28, before declining slightly in the older age groups. Individuals unable to work have the highest BMI relative to the baseline, with a coefficient of 1.18, while those in full-time education have a lower BMI than the baseline, with a coefficient of -0.87. Employed and retired individuals show small positive associations with BMI of 0.67 and 0.66 respectively. Finally, individuals who meet the recommended daily vegetable intake have a BMI that is on average 0.42 units lower than those who do not.
+>>>>>>> Stashed changes
 
 ```{r}
 #| echo: false
@@ -247,4 +252,9 @@ performance::check_model(full_model,check=c("qq","normality","homogeneity","line
 
 ```
 
+<<<<<<< Updated upstream
+=======
+The model assumptions were assessed using the diagnostic plots displayed in @fig-resids. The linearity plot shows residuals scattered randomly around zero, suggesting the linearity assumption is reasonably satisfied. The homogeneity of variance plot similarly shows no strong pattern in the spread of residuals across fitted values, indicating constant variance is approximately met. However, the Q-Q plot and density plot indicate that the residuals are not normally distributed, displaying a left skew. This suggests some caution should be applied when interpreting the results of this model, though given the large sample size, the parameter estimates remain approximately valid by the Central Limit Theorem.
+
+>>>>>>> Stashed changes
 # Conclusion {#sec-conc}

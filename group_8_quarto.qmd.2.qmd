@@ -99,7 +99,7 @@ ggplot(BMI_data,aes(x=BMI))+
 #| message: false
 #| warning: false
 #| fig-width: 6.5
-#| fig-height: 3
+#| fig-height: 2.5
 #| fig-pos: 'h'
 #| label: fig-boxplots_BMI_year
 #| fig-cap: Boxplots of BMI for each year of survey
@@ -121,7 +121,7 @@ ggplot(BMI_data,aes(x=factor(Year),y=BMI,fill=factor(Year)))+
 #| message: false
 #| warning: false
 #| fig-width: 7
-#| fig-height: 3.5
+#| fig-height: 2
 #| fig-pos: 'h'
 #| label: fig-boxplots_demo_vars
 #| fig-cap: Boxplots of BMI across the demographic variables, age group and sex
@@ -133,7 +133,7 @@ p1<-ggplot(BMI_data,aes(x=AgeGroup,y=BMI,fill=AgeGroup))+
   theme(legend.position = "none")
 p2<-ggplot(BMI_data,aes(x=Sex,y=BMI,fill=Sex))+
   geom_boxplot()+
-  scale_fill_manual(values=c("hotpink1","darkolivegreen3"))+
+  scale_fill_manual(values=c("darkolivegreen3","hotpink1"))+
   labs(title="BMI vs Sex",
        x="Sex", y="BMI")+
   theme(legend.position = "none")
@@ -154,7 +154,7 @@ There appears to be little difference in the distribution of BMI for female and 
 #| fig-height: 3.5
 #| fig-cap: Boxplots of BMI across the socio-economic variable, employment
 #| label: fig-boxplot_employ
-#| fig-pos: "h"
+#| fig-pos: "H"
 
 ggplot(BMI_data,aes(x=Employment,y=BMI,fill=Employment))+
   geom_boxplot()+
@@ -171,7 +171,8 @@ ggplot(BMI_data,aes(x=Employment,y=BMI,fill=Employment))+
 ```{r}
 #| echo: false
 #| fig-width: 7
-#| fig-height: 3.5
+#| fig-height: 2
+#| fig-pos: "H"
 #| fig-cap: Boxplots of BMI across the lifestyle variables fruit and veg
 #| label: fig-boxplots_fruit_veg
 

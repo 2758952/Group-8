@@ -215,7 +215,6 @@ full_model <- lm(BMI ~ AgeGroup + Sex + Employment + Veg + Fruit + Year, data = 
 tab_model(full_model,show.ci = F)
 ```
 
-Looking at @tbl-lm, we can see the reduced model is:
 The estimated coefficients from this model are presented in \@tbl-lm, from which the reduced model can be determined by removing variables whose coefficients were not statistically significant at the 5% significance level. Sex, fruit intake, and year were all found to be non-significant and were therefore excluded. The removal of year indicates that there is no statistically significant evidence that BMI in Scotland changed over the years 2008--2012, after accounting for the remaining covariates.
 
 ```{=tex}

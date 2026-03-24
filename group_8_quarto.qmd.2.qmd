@@ -150,6 +150,8 @@ There appears to be little difference in the distribution of BMI for female and 
 #| echo: false
 #| message: false
 #| warning: false
+#| fig-width: 7
+#| fig-height: 3.5
 #| fig-cap: Boxplots of BMI across the socio-economic variable, employment
 #| label: fig-boxplot_employ
 #| fig-pos: "h"
@@ -168,6 +170,8 @@ ggplot(BMI_data,aes(x=Employment,y=BMI,fill=Employment))+
 
 ```{r}
 #| echo: false
+#| fig-width: 7
+#| fig-height: 3.5
 #| fig-cap: Boxplots of BMI across the lifestyle variables fruit and veg
 #| label: fig-boxplots_fruit_veg
 

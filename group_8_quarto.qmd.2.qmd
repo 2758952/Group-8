@@ -195,7 +195,6 @@ grid.arrange(p1,p2,ncol=2)
 
 # Formal Data Analysis {#sec-fda}
 
-We start by fitting the full multiple regression model containing all explanatory variables. The full model can be written as:
 
 ```{=tex}
 \begin{align*}

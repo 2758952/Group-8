@@ -78,6 +78,20 @@ kable(summary_BMI)
 
 ## Distribution Of BMI
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| label: fig-histogram
+#| fig-cap: Histogram showing distribution of BMI.
+ggplot(BMI_data,aes(x=BMI))+
+  geom_histogram(binwidth=1,fill="hotpink1",color="black")+
+  labs(x="BMI",
+       y="Freguency")
+```
+
+@fig-histogram shows BMI's distribution is slightly right-skewed and peaks around 26-28. We can observe that the majority of values fall between 22-32, with a large portion of individuals being classifiable as overweight. Highlighted by the peak falling within the overweight grouping.
+
 ## BMI and Year
 
 ```{r}

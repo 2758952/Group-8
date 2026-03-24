@@ -180,12 +180,12 @@ p2<-ggplot(BMI_data,aes(x=Veg,y=BMI,fill=Veg))+
   geom_boxplot()+
   theme(legend.position = "none")+
   scale_fill_manual(values=c("darkolivegreen3","hotpink1"))+
-  labs(y="BMI (kg/m^2)")
+  labs(y="BMI (kg/m^2)",title="BMI vs Veg")
 p1<-ggplot(BMI_data,aes(x=Fruit,y=BMI,fill=Fruit))+
   geom_boxplot()+
   theme(legend.position = "none")+
   scale_fill_manual(values=c("darkolivegreen3","hotpink1"))+
-  labs(y="BMI (kg/m^2)")
+  labs(y="BMI (kg/m^2)",title="BMI vs Fruit")
 
 grid.arrange(p1,p2,ncol=2)
 

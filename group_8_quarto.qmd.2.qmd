@@ -195,6 +195,8 @@ grid.arrange(p1,p2,ncol=2)
 
 # Formal Data Analysis {#sec-fda}
 
+## Full Multiple Regression Model
+
 A full multiple regression model was fitted with BMI as the response variable and all explanatory variables as predictors.
 
 \begin{align*}
@@ -214,7 +216,18 @@ full_model <- lm(BMI ~ AgeGroup + Sex + Employment + Veg + Fruit + Year, data = 
 tab_model(full_model,show.ci = F)
 ```
 
-The estimated coefficients from this model are presented in \@tbl-lm, from which the reduced model can be determined by removing variables whose coefficients were not statistically significant at the 5% significance level. Sex, fruit intake, and year were all found to be non-significant and were therefore excluded. The removal of year indicates that there is no statistically significant evidence that BMI in Scotland changed over the years 2008--2012, after accounting for the remaining covariates.
+The estimated coefficients from this model are presented in @tbl-lm, from which the reduced model can be determined by removing variables whose coefficients were not statistically significant at the 5% significance level. Sex, fruit intake, and year were all found to be non-significant and were therefore excluded. The removal of year indicates that there is no statistically significant evidence that BMI in Scotland changed over the years 2008--2012, after accounting for the remaining covariates.
+
+## Reduced Model
+
+```{r}
+#| echo: false
+#| label: tbl-reduced_mod
+#| tbl-cap: Estimates of the reduced regression model coefficients
+
+reduced_model<-lm(BMI~AgeGroup+Employment+Veg,data=BMI_data)
+tab_model(reduced_model,show.ci = F)
+```
 
 \begin{align*}
 BMI ~=~& \alpha + \beta_{Age[25\text{-}34]} \cdot \mathbb{I}_{Age}([25\text{-}34]) + \beta_{Age[35\text{-}44]} \cdot \mathbb{I}_{Age}([35\text{-}44]) \\
@@ -237,18 +250,40 @@ BMI ~=~& -17.9 + 1.18 \cdot \mathbb{I}_{Age}([25\text{-}34]) + 2.5 \cdot \mathbb
 
 The baseline category for this model is individuals aged 16-24, not in full-time education and not meeting the recommended daily vegetable intake. Interpreting the coefficients relative to this baseline: BMI increases substantially with age, peaking in the 55-64 age group with a coefficient of 3.28, before declining slightly in the older age groups. Individuals unable to work have the highest BMI relative to the baseline, with a coefficient of 1.18, while those in full-time education have a lower BMI than the baseline, with a coefficient of -0.87. Employed and retired individuals show small positive associations with BMI of 0.67 and 0.66 respectively. Finally, individuals who meet the recommended daily vegetable intake have a BMI that is on average 0.42 units lower than those who do not.
 
+## Model Diagnostics
+
 ```{r}
 #| echo: false
 #| fig-cap: Final model diagnostic plots
 #| label: fig-resids
 #| fig-width: 7
-#| fig-height: 7
+#| fig-height: 4.5
 #| fig-align: center
 
-performance::check_model(full_model,check=c("qq","normality","homogeneity","linearity"))
+performance::check_model(reduced_model,check=c("qq","normality","homogeneity","linearity"))
 
+
+```
+
+```{r}
+#| echo: false
+#| fig-cap: Diagnostics for multicolinearity
+#| label: fig-vif
+#| fig-width: 7
+#| fig-height: 3
+#| fig-align: center
+
+performance::check_model(reduced_model,check="vif")
 ```
 
 The model assumptions were assessed using the diagnostic plots displayed in @fig-resids. The linearity plot shows residuals scattered randomly around zero, suggesting the linearity assumption is reasonably satisfied. The homogeneity of variance plot similarly shows no strong pattern in the spread of residuals across fitted values, indicating constant variance is approximately met. However, the Q-Q plot and density plot indicate that the residuals are not normally distributed, displaying a left skew. This suggests some caution should be applied when interpreting the results of this model, though given the large sample size, the parameter estimates remain approximately valid by the Central Limit Theorem.
 
 # Conclusion {#sec-conc}
+
+The aim of this investigation was to determine if BMI in Scotland changed between 2008 and 2012 and if BMI distribution differed by demographic, socio-economic, and lifestyle factors. The multiple regression analysis indicated that year was not a statistically significant predictor of BMI, suggesting that there is no evidence that the average BMI in Scotland changed over the period of 2008 to 2012.
+
+Several demographic and socio-economic variables were found to be associated with BMI, with age group showing the strongest effect. BMI generally increased with age and peaked at the 55-64 age group before decreasing slightly in older groups. Employment status also showed significant association, with individuals who were unable to work having a higher BMI on average, and those in full-time education had a lower BMI relative to the baseline group. Meeting the recommended vegetable intake was associated with a small reduction in BMI. Sex and fruit intake were not found to be statistically significant predictors.
+
+Diagnostics indicated that all the necessary assumptions were met other than normality of residuals. But due to the large sample size, the regression estimates could be considered approximately valid, although this assumption violation should be considered when interpreting the results.
+
+Future work on this topic could involve investigating interaction effects between variables, and analysing additional lifestyle and socio-economic variables such as smoking, drinking, physical activity, income level, etc., to further investigate factors impacting BMI. Extending the analysis to include more recent years if the Scottish Health Survey could also allow a more in-depth investigation into how BMI in Scotland has changed over the years.

@@ -84,6 +84,7 @@ kable(summary_BMI)
 #| warning: false
 #| label: fig-histogram
 #| fig-cap: Histogram showing distribution of BMI.
+#| fig-height: 3
 ggplot(BMI_data,aes(x=BMI))+
   geom_histogram(binwidth=1,fill="hotpink1",color="black")+
   labs(x="BMI",
@@ -209,14 +210,11 @@ BMI ~=~& \alpha + \beta_{AgeGroup} \cdot \mathbb{I}_{AgeGroup}(x) + \beta_{Sex} 
 #| warning: false
 #| echo: false
 #| message: false
-#| label: tbl-lm
-#| tbl-cap: Estimates of the regression model coefficient
 
 full_model <- lm(BMI ~ AgeGroup + Sex + Employment + Veg + Fruit + Year, data = BMI_data)
-tab_model(full_model,show.ci = F)
 ```
 
-The estimated coefficients from this model are presented in @tbl-lm, from which the reduced model can be determined by removing variables whose coefficients were not statistically significant at the 5% significance level. Sex, fruit intake, and year were all found to be non-significant and were therefore excluded. The removal of year indicates that there is no statistically significant evidence that BMI in Scotland changed over the years 2008--2012, after accounting for the remaining covariates.
+The reduced model was determined by removing variables whose coefficients were not statistically significant at the 5% significance level. Sex, fruit intake, and year were all found to be non-significant and were therefore excluded. The removal of year (which had a p-value of 0.377) indicates that there is no statistically significant evidence that BMI in Scotland changed over the years 2008 to 2012, after accounting for the remaining covariates.
 
 ## Reduced Model
 
@@ -248,7 +246,7 @@ BMI ~=~& -17.9 + 1.18 \cdot \mathbb{I}_{Age}([25\text{-}34]) + 2.5 \cdot \mathbb
        & - 0.42 \cdot \mathbb{I}_{Veg}(Yes)
 \end{align*}
 
-The baseline category for this model is individuals aged 16-24, not in full-time education and not meeting the recommended daily vegetable intake. Interpreting the coefficients relative to this baseline: BMI increases substantially with age, peaking in the 55-64 age group with a coefficient of 3.28, before declining slightly in the older age groups. Individuals unable to work have the highest BMI relative to the baseline, with a coefficient of 1.18, while those in full-time education have a lower BMI than the baseline, with a coefficient of -0.87. Employed and retired individuals show small positive associations with BMI of 0.67 and 0.66 respectively. Finally, individuals who meet the recommended daily vegetable intake have a BMI that is on average 0.42 units lower than those who do not.
+The baseline category for this model is individuals aged 16-24, not in full-time education and not meeting the recommended daily vegetable intake. Interpreting the coefficients relative to this baseline: BMI increases substantially with age, peaking in the 55-64 age group with a coefficient of 3.29, before declining slightly in the older age groups. Individuals unable to work have the highest BMI relative to the baseline, with a coefficient of 1.18, while those in full-time education have a lower BMI than the baseline, with a coefficient of -0.87. Employed and retired individuals show small positive associations with BMI of 0.66 and 0.65 respectively. Finally, individuals who meet the recommended daily vegetable intake have a BMI that is on average 0.42 units lower than those who do not.
 
 ## Model Diagnostics
 
@@ -272,11 +270,14 @@ performance::check_model(reduced_model,check=c("qq","normality","homogeneity","l
 #| fig-width: 7
 #| fig-height: 3
 #| fig-align: center
+#| fig-pos: "H"
 
 performance::check_model(reduced_model,check="vif")
 ```
 
 The model assumptions were assessed using the diagnostic plots displayed in @fig-resids. The linearity plot shows residuals scattered randomly around zero, suggesting the linearity assumption is reasonably satisfied. The homogeneity of variance plot similarly shows no strong pattern in the spread of residuals across fitted values, indicating constant variance is approximately met. However, the Q-Q plot and density plot indicate that the residuals are not normally distributed, displaying a left skew. This suggests some caution should be applied when interpreting the results of this model, though given the large sample size, the parameter estimates remain approximately valid by the Central Limit Theorem.
+
+Multicolliniearity was also assessed in @fig-vif which showed that each factor had a VIF of less than 5, indicating that multicollinearity is not a concern in this model.
 
 # Conclusion {#sec-conc}
 

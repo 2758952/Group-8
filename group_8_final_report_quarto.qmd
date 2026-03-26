@@ -26,11 +26,11 @@ library(gridExtra)
 
 # Introduction {#sec-intro}
 
-This investigation uses data from the 2008 - 2012 Scottish Health Survey, which collects information on the health, socio-economic, and lifestyle factors of people living in Scotland. The factors included in this dataset are: age group, sex, employment status, meets recommended vegetable intake (Yes/No), meets recommended fruit intake (Yes/No), survey year, and body mass index (BMI).
+This investigation uses data from the 2008 to 2012 Scottish Health Survey, which collects information on the health, socio-economic, and lifestyle factors of people living in Scotland. The factors included in this dataset are: age group, sex, employment status, meets recommended vegetable intake (Yes/No), meets recommended fruit intake (Yes/No), survey year, and body mass index (BMI).
 
 Body mass index is a quantity derived from the mass and height of a person, calculated as mass divided by the squared height, and measured in $kg/m^2$. It is a useful indicator for determining if an individual is underweight (BMI under 18.5), overweight (BMI over 25), or at a healthy weight, and it is especially useful for health data.
 
-The aim of this investigation is to determine whether the body mass index in Scotland has changed between 2008 and 2012, and to assess if there are any differences in the BMI distribution by age, gender, socio-economic factors (employment status) or lifestyle factors (meets recommended fruit and veg intake).
+The aim of this investigation is to determine whether the BMI in Scotland on average has changed between 2008 and 2012, and to assess if there are any differences in the BMI distribution by age, gender, socio-economic factors (employment status) or lifestyle factors (meets recommended fruit and vegetable intake).
 
 # Exploratory Analysis {#sec-eda}
 
@@ -167,7 +167,7 @@ ggplot(BMI_data,aes(x=Employment,y=BMI,fill=Employment))+
 
 ```
 
-@fig-boxplot_employ shows the distribution of BMI across the different employment categories. Individuals in full-time education appear to have a lower BMI compared to other employment groups, but the interquartile ranges for all groups substantially overlap, suggesting that the differences in BMI across these groups are relatively small and significance should be investigated with formal analysis. There also appear to be outliers at both extremes of BMI across the categories.
+@fig-boxplot_employ shows the distribution of BMI across the different employment categories. Individuals in full-time education appear to have a lower BMI compared to other employment groups, but the interquartile ranges for all groups substantially overlap, suggesting that the differences in BMI across these groups are relatively small and significance should be investigated with formal analysis. There also appears to be outliers at both extremes of BMI across the categories.
 
 ```{r}
 #| echo: false

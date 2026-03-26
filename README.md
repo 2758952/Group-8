@@ -34,7 +34,7 @@ The analysis included:
   average
   
 ## How to Run
-1. Open the file "group_8_quarto.qmd.2.qmd"
+1. Open the file "group_8_final_report_quarto.qmd"
 2. Install the required packages:
  - tidyverse
  - ggplot2
@@ -45,13 +45,16 @@ The analysis included:
  - kableExtra
  - gridExtra
 3. Ensure the file "DAProject8.csv" is in the working directory
-4. Render the "group_8_quarto.qmd.2.qmd" to view the report
+4. Render the "group_8_final_report_quarto.qmd" to view the report
 
 ## Repository Structure
-- Folder: Formal Analysis_files
+- Folder: Formal Analysis Drafts
   - Contains formal analysis draft code and files
-- Folder: Report Quarto and Pdfs
-  - Contains draft report files
+- Folder: Report Drafts
+  - Contains draft report code and files
+- DAProject8.csv
+- group_8_final_report_quarto.pdf
+- group_8_final_report_quarto.qmd
 - README.md
 
 
